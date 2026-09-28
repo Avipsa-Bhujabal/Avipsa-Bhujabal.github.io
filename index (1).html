@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avipsa's Data Garden</title>
+<meta name="description" content="Avipsa Bhujabal, data analyst and data engineer. Projects in ML, data pipelines, GenAI and Power BI.">
+<meta property="og:title" content="Avipsa Bhujabal · Data Portfolio">
+<meta property="og:description" content="Data analyst and data engineer. ML apps, data pipelines, GenAI and Power BI dashboards.">
+<meta property="og:image" content="https://avipsa-bhujabal.github.io/cover.png">
+<meta property="og:url" content="https://avipsa-bhujabal.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Parisienne&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FDF1F4; --surface:#FFFAFB; --ink:#3B2230; --muted:#7B5A68; --line:#F0D2DC;
+  --rose:#C2385A; --rose-soft:#FAD6E0; --latte:#CFE1C6; --cocoa:#6E9A6A;
+  --peony:#EE8FA6; --peony-2:#F6B5C5; --peony-3:#E0708C; --tulip:#F08C6E; --tulip-2:#F7B39A;
+  --carn:#C9375C; --carn-2:#E0607E; --leaf:#6E9A6A; --leaf-2:#8DB685; --wrap:#F7E3D2; --ribbon:#C2385A;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Nunito", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1F1519; --surface:#2A1D23; --ink:#F8E6EC; --muted:#C9A5B3; --line:#43303A;
+    --rose:#F28BA8; --rose-soft:#4E2635; --latte:#3E5A3C; --cocoa:#9BC493;
+    --wrap:#4A3A36; --leaf:#7FAE79; --leaf-2:#5E8C59;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1F1519; --surface:#2A1D23; --ink:#F8E6EC; --muted:#C9A5B3; --line:#43303A;
+  --rose:#F28BA8; --rose-soft:#4E2635; --latte:#3E5A3C; --cocoa:#9BC493;
+  --wrap:#4A3A36; --leaf:#7FAE79; --leaf-2:#5E8C59;
+  color-scheme:dark;
+}
+body[data-blend="industry"]{ --ribbon:#F08C6E; }
+body[data-blend="research"]{ --ribbon:#C9375C; }
+body[data-blend="house"]{ --ribbon:#EE8FA6; }
+
+*{box-sizing:border-box}
+body{background:radial-gradient(520px 420px at 88% 0, color-mix(in srgb, var(--peony) 30%, transparent), transparent 70%), radial-gradient(460px 380px at 0 520px, color-mix(in srgb, var(--tulip) 18%, transparent), transparent 70%), var(--bg); background-repeat:no-repeat; overflow-x:clip; color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.6; padding-inline:20px; margin:0;}
+.wrap{max-width:1080px; margin-inline:auto; position:relative}
+a{color:var(--rose)}
+:focus-visible{outline:2px solid var(--rose); outline-offset:3px; border-radius:6px}
+h1,h2,h3{font-family:var(--display); font-weight:400; line-height:1.1; text-wrap:balance; margin:0}
+.eyebrow{font-family:var(--mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+
+/* nav */
+nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px dashed var(--line); margin-inline:-20px; padding:12px 20px}
+nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.brand{font-family:var(--display); font-size:1.35rem; text-decoration:none; color:var(--ink)}
+.brand span{color:var(--rose)}
+nav ul{list-style:none; display:flex; gap:18px; margin:0; padding:0; flex-wrap:wrap}
+nav ul a{color:var(--muted); text-decoration:none; font-weight:600; font-size:.95rem}
+nav ul a:hover{color:var(--rose)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:1.25fr .9fr; gap:40px; align-items:center; padding-block:56px 40px}
+.hero h1{font-size:clamp(2.6rem, 6.4vw, 4.6rem)}
+.hero h1 em{font-style:italic; color:var(--rose)}
+.tagline{font-size:1.15rem; max-width:34em; color:var(--muted); margin:18px 0 26px; min-height:5.2em; transition:opacity .25s}
+.blend-label{font-family:var(--mono); font-size:.8rem; color:var(--muted); margin-bottom:10px}
+.blends{display:flex; gap:10px; flex-wrap:wrap}
+.blend{font:inherit; font-weight:700; font-size:.95rem; border:1.5px solid var(--ink); background:transparent; color:var(--ink); padding:9px 16px; border-radius:999px; cursor:pointer; display:flex; align-items:center; gap:8px; transition:background .2s, color .2s, transform .15s}
+.blend:hover{transform:translateY(-2px)}
+.blend .dot{width:12px; height:12px; border-radius:50%; border:1px solid var(--ink)}
+.blend[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+.blend[aria-pressed="true"] .dot{border-color:var(--bg)}
+.facts{display:flex; gap:22px; flex-wrap:wrap; margin-top:28px; font-size:.92rem; color:var(--muted)}
+.facts b{color:var(--ink); font-weight:800}
+
+.cup-wrap{position:relative; display:grid; place-items:center}
+.cup{width:100%; max-width:360px; height:auto; cursor:pointer}
+.cup .fl{transform-box:fill-box; transform-origin:center; transition:transform .6s cubic-bezier(.3,1.4,.5,1), filter .6s}
+body[data-blend="industry"] .cup .tulip, body[data-blend="house"] .cup .peony, body[data-blend="research"] .cup .carnation{transform:scale(1.14); filter:drop-shadow(0 4px 8px rgba(194,56,90,.28))}
+.cup .sway{transform-box:view-box; transform-origin:130px 250px; animation:sway 6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)} 50%{transform:rotate(1.4deg)}}
+.cup .ribbon{fill:var(--ribbon); transition:fill .6s}
+.cup-hint{font-family:var(--mono); font-size:.75rem; color:var(--muted); margin-top:4px}
+
+section{padding-block:56px; border-top:1px dashed var(--line)}
+.sec-head{display:flex; justify-content:space-between; align-items:end; gap:16px; flex-wrap:wrap; margin-bottom:28px}
+.sec-head h2{font-size:clamp(2rem, 4.4vw, 3rem)}
+.sec-head p{margin:0; color:var(--muted); max-width:30em}
+
+/* menu board */
+.menu{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:clamp(18px, 4vw, 40px); display:grid; gap:4px}
+.menu-cat{font-family:var(--mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--rose); margin:18px 0 6px}
+.menu-cat:first-child{margin-top:0}
+details.item{border-bottom:1px dashed var(--line); transition:opacity .35s}
+details.item:last-of-type{border-bottom:0}
+details.item.faded{opacity:1}
+details.item summary{list-style:none; cursor:pointer; padding:14px 0; display:grid; grid-template-columns:auto 1fr auto; column-gap:12px; align-items:baseline}
+details.item summary::-webkit-details-marker{display:none}
+.item .name{font-family:var(--display); font-size:1.45rem}
+.item .leader{border-bottom:2px dotted var(--muted); opacity:.5; transform:translateY(-6px)}
+.item .price{font-family:var(--mono); font-size:.82rem; color:var(--muted); white-space:nowrap}
+.item .notes{grid-column:1 / -1; font-size:.95rem; color:var(--muted); font-style:italic}
+.item .pick{display:none; font-family:var(--mono); font-style:normal; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--rose-soft); color:var(--rose); padding:2px 8px; border-radius:999px; margin-left:8px; vertical-align:middle}
+.item.recommended .pick{display:inline-block}
+.item summary:hover .name{color:var(--rose)}
+.item .plus{font-family:var(--mono); color:var(--rose); margin-left:10px; display:inline-block; transition:transform .2s}
+.item[open] .plus{transform:rotate(45deg)}
+.item .body{padding:0 0 20px; max-width:62ch}
+.item .body ul{margin:8px 0 0; padding-left:20px}
+.item .body li{margin-bottom:4px}
+.stack{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px}
+.gh{display:inline-block; margin-top:12px; font-weight:800; font-size:.92rem; text-decoration:none; border-bottom:2px solid var(--rose-soft)}
+.gh:hover{border-color:var(--rose)}
+.stack span{font-family:var(--mono); font-size:.75rem; border:1px solid var(--line); border-radius:6px; padding:2px 8px; color:var(--muted)}
+
+/* flight chart */
+.flight{display:grid; grid-template-columns:1fr 1.3fr; gap:36px; align-items:start}
+.flight p{margin-top:0}
+.note{font-size:.88rem; color:var(--muted); border-left:3px solid var(--rose-soft); padding-left:12px}
+.chart{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:22px}
+.tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px}
+.tab{font-family:var(--mono); font-size:.8rem; border:1px solid var(--line); background:transparent; color:var(--muted); border-radius:8px; padding:5px 10px; cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--rose); border-color:var(--rose); color:var(--surface)}
+.bars{display:grid; gap:16px}
+.bar-row{display:grid; grid-template-columns:8.5em 1fr 4em; gap:10px; align-items:center; font-size:.9rem}
+.bar-track{height:22px; background:color-mix(in srgb, var(--line) 60%, transparent); border-radius:6px; overflow:hidden}
+.bar-fill{height:100%; border-radius:6px; background:var(--latte); transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar-row.best .bar-fill{background:var(--rose)}
+.bar-val{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right}
+.axis{display:flex; justify-content:space-between; font-family:var(--mono); font-size:.72rem; color:var(--muted); margin-left:calc(8.5em + 10px); margin-right:calc(4em + 10px); margin-top:6px}
+.chart-cap{font-size:.82rem; color:var(--muted); margin:14px 0 0}
+
+/* pantry */
+.pantry{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px}
+.jar{border:1px solid var(--line); border-radius:6px 6px 16px 16px; border-top:10px solid var(--rose-soft); padding:20px; background:var(--surface); position:relative}
+.jar::before{content:""; position:absolute; top:-17px; right:18px; width:16px; height:26px; background:var(--leaf-2); border-radius:0 100% 0 100%; transform:rotate(20deg)}
+.jar h3{font-size:1.3rem; margin-bottom:10px}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-size:.85rem; background:var(--rose-soft); color:var(--ink); border-radius:999px; padding:3px 11px}
+.chip.hot{background:var(--rose); color:var(--surface); font-weight:700}
+
+/* story */
+.story{display:grid; grid-template-columns:1fr 1fr; gap:36px}
+.story h3{font-size:1.5rem; margin-bottom:14px}
+.entry{padding:14px 0; border-bottom:1px dashed var(--line)}
+.entry:last-child{border-bottom:0}
+.entry b{font-weight:800; display:block}
+.entry .where{font-family:var(--mono); font-size:.8rem; color:var(--rose)}
+.entry p{margin:4px 0 0; color:var(--muted); font-size:.95rem}
+
+/* research */
+.notes-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px}
+.card-q{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:20px}
+.card-q .eyebrow{color:var(--rose)}
+.card-q p{margin:8px 0 0}
+
+/* contact */
+.contact{text-align:left; display:grid; grid-template-columns:1.2fr 1fr; gap:30px; align-items:center}
+.contact h2{font-size:clamp(2.2rem, 5vw, 3.4rem)}
+.email-box{display:flex; gap:8px; flex-wrap:wrap; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px}
+.email-box code{font-family:var(--mono); font-size:.95rem; user-select:all; overflow-wrap:anywhere; flex:1}
+.btn{font:inherit; font-weight:700; background:var(--rose); color:var(--surface); border:0; border-radius:999px; padding:9px 18px; cursor:pointer}
+.btn:hover{filter:brightness(1.07)}
+.socials{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.btn-outline{font-weight:800; text-decoration:none; color:var(--ink); border:1.5px solid var(--ink); border-radius:999px; padding:8px 18px}
+.btn-outline:hover{background:var(--ink); color:var(--bg)}
+footer{padding-block:30px 44px; font-family:var(--mono); font-size:.78rem; color:var(--muted); border-top:1px dashed var(--line)}
+
+
+/* path */
+.path{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; position:relative; counter-reset:step}
+.path::before{content:""; position:absolute; top:11px; left:4%; right:4%; border-top:2px dashed var(--rose-soft)}
+.path li{position:relative; counter-increment:step}
+.path .bean{display:block; width:22px; height:22px; border-radius:50% 50% 50% 0; background:var(--peony); position:relative; margin-bottom:14px; transform:rotate(-45deg)}
+.path .bean::after{content:""; position:absolute; inset:6px; border-radius:50%; background:var(--bg); opacity:.55}
+.path li:nth-child(2) .bean{background:var(--tulip)} .path li:nth-child(3) .bean{background:var(--carn-2)} .path li:nth-child(4) .bean{background:var(--peony-3)} .path li:last-child .bean{background:var(--rose)}
+.path b{font-family:var(--display); font-weight:400; font-size:1.25rem; display:block}
+.path b::before{content:counter(step) " · "; font-family:var(--mono); font-size:.75rem; color:var(--rose); vertical-align:middle}
+.path p{margin:6px 0 0; font-size:.93rem; color:var(--muted)}
+.goal{margin:26px 0 0; max-width:62ch; font-size:1.1rem; font-family:var(--display); line-height:1.4}
+.goal .eyebrow{display:block; font-size:.75rem; margin-bottom:6px; color:var(--rose)}
+@media (max-width:820px){
+  .path{grid-template-columns:1fr; gap:20px; padding-left:34px}
+  .path::before{top:4px; bottom:4px; left:10px; right:auto; border-top:0; border-left:2px dashed var(--rose-soft)}
+  .path .bean{position:absolute; left:-34px; top:2px; margin:0}
+}
+
+/* ---- live github */
+.item .live{grid-row:4; grid-column:1 / -1; font-family:var(--mono); font-size:.72rem; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap}
+.item .live b{font-weight:500; color:var(--leaf)}
+details.item.cat-new{--c:var(--leaf-2)}
+.synced{font-family:var(--mono); font-size:.75rem; color:var(--muted); margin-top:14px}
+/* ---- polish pass */
+#petals{position:absolute; top:0; left:0; width:100%; height:760px; pointer-events:none; z-index:0}
+.hero{position:relative; z-index:1}
+.hero h1 .hi{font-size:.62em; display:inline-block; margin-bottom:.1em}
+.hero h1 .script{font-family:"Parisienne", "Brush Script MT", cursive; color:var(--rose); font-size:1.25em; line-height:.9; padding-right:.1em}
+.facts{gap:10px}
+.badge{display:inline-flex; align-items:center; gap:7px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:6px 14px 6px 8px; box-shadow:0 2px 0 var(--rose-soft)}
+.badge i{font-style:normal; color:var(--surface); background:var(--peony); width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font-size:.8rem}
+.badge:nth-child(2) i{background:var(--tulip)} .badge:nth-child(3) i{background:var(--carn)}
+.blend{background:var(--surface)}
+.marquee{overflow:hidden; width:100vw; margin-left:calc(50% - 50vw); border-block:1px solid var(--line); background:var(--rose-soft); padding-block:12px; position:relative; z-index:1}
+.marquee .track{display:flex; gap:22px; width:max-content; animation:marq 40s linear infinite; font-family:var(--display); font-size:1.25rem; color:var(--ink); align-items:center}
+.marquee i{font-style:normal; color:var(--rose); font-size:1rem}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+section{border-top:0}
+.sec-head h2::after{content:" ✿"; color:var(--peony); font-size:.55em; vertical-align:middle}
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+.filter{font:inherit; font-weight:700; font-size:.9rem; background:var(--surface); color:var(--ink); border:1.5px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer; transition:all .2s}
+.filter span{font-family:var(--mono); font-size:.72rem; color:var(--muted); margin-left:4px}
+.filter:hover{border-color:var(--rose)}
+.filter[aria-pressed="true"]{background:var(--rose); border-color:var(--rose); color:var(--surface)}
+.filter[aria-pressed="true"] span{color:var(--surface)}
+.menu{background:none; border:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap:18px; align-items:start}
+details.item{--c:var(--peony); background:var(--surface); border:1px solid var(--line); border-top:6px solid var(--c); border-radius:18px; padding:0 22px; transition:transform .25s, box-shadow .25s, opacity .35s}
+details.item.cat-dash{--c:var(--tulip)} details.item.cat-res{--c:var(--carn-2)}
+details.item:last-of-type{border-bottom:1px solid var(--line)}
+details.item:hover{transform:translateY(-4px); box-shadow:0 12px 28px -14px color-mix(in srgb, var(--c) 70%, transparent)}
+details.item[open]{grid-column:1 / -1; transform:none}
+details.item summary{grid-template-columns:auto 1fr; padding:20px 0 18px; row-gap:6px}
+.item .flw{grid-row:1; grid-column:1; width:34px; height:34px; border-radius:50%; background:color-mix(in srgb, var(--c) 22%, transparent); color:var(--c); display:grid; place-items:center; font-size:1.1rem; margin-right:4px}
+.item .name{grid-row:1; grid-column:2; align-self:center; font-size:1.35rem; line-height:1.2}
+.item .leader{display:none}
+.item .price{grid-row:2; grid-column:1 / -1; justify-self:start; background:color-mix(in srgb, var(--c) 16%, transparent); color:var(--ink); padding:2px 10px; border-radius:999px; font-size:.74rem}
+.item .notes{grid-row:3}
+details.item{position:relative}
+.item .plus{position:absolute; right:18px; top:20px; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:color-mix(in srgb, var(--c) 18%, transparent); margin:0}
+details.item summary{padding-right:40px}
+.jar{transition:transform .25s}
+.jar:hover{transform:translateY(-4px) rotate(-.6deg)}
+.entry{transition:padding-left .25s}
+.entry:hover{padding-left:8px}
+.card-q{transition:transform .25s} .card-q:hover{transform:translateY(-4px)}
+@media (prefers-reduced-motion: reduce){ .marquee .track{animation:none} }
+@media (max-width:820px){
+  .hero,.flight,.story,.contact{grid-template-columns:1fr}
+  .cup-wrap{order:-1}
+  .cup{max-width:220px}
+  .hero{padding-block:32px}
+  .tagline{min-height:0}
+}
+@media (max-width:480px){
+  .bar-row{grid-template-columns:6.5em 1fr 3.5em}
+  .axis{margin-left:calc(6.5em + 10px); margin-right:calc(3.5em + 10px)}
+  details.item summary{grid-template-columns:auto 1fr}
+  .item .leader{display:none}
+}
+
+@media (pointer: fine){
+  html, body{cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M16 28 C 6 20, 2 15, 2 10 C 2 5, 6 3, 9.5 3 C 12.5 3, 15 5, 16 8 C 17 5, 19.5 3, 22.5 3 C 26 3, 30 5, 30 10 C 30 15, 26 20, 16 28 Z' fill='%23E0607E' stroke='%23fff' stroke-width='2'/></svg>") 16 16, auto}
+  a, button, summary, .cup, label{cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M16 14 C 16 20, 15 25, 16 31' stroke='%236E9A6A' stroke-width='2.2' fill='none' stroke-linecap='round'/><path d='M16 26 C 11 25, 8 21, 8 18 C 12 19, 15 22, 16 26 Z' fill='%238DB685'/><path d='M7 5 C 6 12, 9 16, 16 16 C 23 16, 26 12, 25 5 C 22 7, 20 8, 19 6 C 18 3, 17 2, 16 1 C 15 2, 14 3, 13 6 C 12 8, 10 7, 7 5 Z' fill='%23E0607E' stroke='%23fff' stroke-width='1.3'/></svg>") 16 8, pointer !important}
+}
+.pop{position:fixed; pointer-events:none; z-index:50; font-size:18px; color:var(--rose); animation:pop .9s ease-out forwards}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.6); opacity:1} 100%{transform:translate(calc(-50% + var(--dx)), calc(-50% - 60px)) scale(1.1); opacity:0}}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important; animation:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">avipsa<span>✿</span>garden</a>
+    <ul>
+      <li><a href="#menu">Projects</a></li>
+      <li><a href="#pantry">Skills</a></li>
+      <li><a href="#story">Experience</a></li>
+      <li><a href="#path">Research</a></li>
+      <li><a href="#hello">Contact</a></li>
+      <li><a href="https://www.linkedin.com/in/avipsa-bhujabal/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <canvas id="petals" aria-hidden="true"></canvas>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Data analyst · data engineer · runs on cold brew &amp; lattes · United States</div>
+      <h1><span class="hi">Hi, I'm</span> <span class="script">Avipsa</span><br>I turn messy data into things people <em>actually</em> use.</h1>
+      <p class="tagline" id="tagline" aria-live="polite"></p>
+      <div class="blend-label">So, what brings you here? ↓</div>
+      <div class="blends" role="group" aria-label="What are you here for?">
+        <button class="blend" data-blend="industry" aria-pressed="true"><span class="dot" style="background:#F08C6E"></span>I'm hiring</button>
+        <button class="blend" data-blend="house" aria-pressed="false"><span class="dot" style="background:#EE8FA6"></span>A bit of everything</button>
+        <button class="blend" data-blend="research" aria-pressed="false"><span class="dot" style="background:#C9375C"></span>I'm a researcher</button>
+      </div>
+      <div class="facts">
+        <span class="badge"><i>✿</i><b>PL-300</b> Power BI Data Analyst</span>
+        <span class="badge"><i>❀</i><b>Databricks</b> Data Engineer Associate</span>
+        <span class="badge"><i>✾</i><b>M.S.</b> Data Science, University at Buffalo</span>
+      </div>
+    </div>
+    <div class="cup-wrap">
+      <svg class="cup" id="cup" viewBox="0 0 260 290" role="img" aria-label="A bouquet of peonies, carnations and tulips. The flower that matches your choice grows. Click to switch."><g class="sway" id="bouquet"></g></svg>
+      <div class="cup-hint">psst… tap the bouquet</div>
+    </div>
+  </header>
+  <div class="marquee" aria-label="Skills"><div class="track"><span>Python</span><i>✿</i><span>SQL</span><i>✿</i><span>Power BI</span><i>✿</i><span>PySpark</span><i>✿</i><span>Databricks</span><i>✿</i><span>Snowflake</span><i>✿</i><span>Airflow</span><i>✿</i><span>LightGBM</span><i>✿</i><span>XGBoost</span><i>✿</i><span>MLflow</span><i>✿</i><span>FastAPI</span><i>✿</i><span>Streamlit</span><i>✿</i><span>Docker</span><i>✿</i><span>AWS</span><i>✿</i><span>RAG &amp; AI agents</span><i>✿</i><span>DAX</span><i>✿</i><span>dbt</span><i>✿</i><span>Terraform</span><i>✿</i><span>Python</span><i>✿</i><span>SQL</span><i>✿</i><span>Power BI</span><i>✿</i><span>PySpark</span><i>✿</i><span>Databricks</span><i>✿</i><span>Snowflake</span><i>✿</i><span>Airflow</span><i>✿</i><span>LightGBM</span><i>✿</i><span>XGBoost</span><i>✿</i><span>MLflow</span><i>✿</i><span>FastAPI</span><i>✿</i><span>Streamlit</span><i>✿</i><span>Docker</span><i>✿</i><span>AWS</span><i>✿</i><span>RAG &amp; AI agents</span><i>✿</i><span>DAX</span><i>✿</i><span>dbt</span><i>✿</i><span>Terraform</span><i>✿</i></div></div>
+
+
+
+
+
+
+
+  <section id="menu">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Fresh from the garden</div>
+        <h2>Projects in bloom</h2>
+      </div>
+      <p>Everything here was grown from seed. Filter by type, then tap a card to see what's inside. Cards marked <i>your pick</i> match what you chose up top.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="filter" data-f="all" aria-pressed="true">All <span></span></button>
+      <button class="filter" data-f="ml" aria-pressed="false">✿ ML &amp; data apps <span></span></button>
+      <button class="filter" data-f="dash" aria-pressed="false">❀ Dashboards <span></span></button>
+      <button class="filter" data-f="res" aria-pressed="false">✾ Research <span></span></button>
+      <button class="filter" data-f="new" aria-pressed="false" hidden>🌱 Just planted <span></span></button>
+    </div>
+    <div class="menu" id="menu-board">
+
+      <details data-repo="UrbanFlow-AI" class="item cat-ml" data-cat="ml" data-for="industry research">
+        <summary>
+          <span class="flw">✿</span><span class="name">UrbanFlow AI<span class="plus">+</span></span><span class="leader"></span><span class="price">city data platform</span>
+          <span class="notes">Taxis, weather and transit delays, all in one city dashboard <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          What happens to a city's traffic when it rains during rush hour? UrbanFlow pulls in NYC taxi trips, NOAA weather and transit delays, and runs them through a full data platform, from raw files to maps, predictions and a chat assistant.
+          <ul>
+            <li>Bronze, silver and gold data layers, with a fallback to synthetic data (and a clear warning) if a real source is missing</li>
+            <li>Features like rush hour, weather, demand by zone and a congestion score, plus H3 hexagon maps of hotspots and trip flows</li>
+            <li>A Random Forest demand model tracked in MLflow, served through FastAPI endpoints and a Streamlit dashboard</li>
+            <li>Airflow orchestration, Docker Compose, CSV exports ready for Power BI, and a Kafka-style live stream simulation</li>
+            <li>UrbanFlow Copilot: ask questions about the data in plain English and get answers grounded in the gold tables</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>PySpark</span><span>Airflow</span><span>H3</span><span>Folium</span><span>scikit-learn</span><span>MLflow</span><span>FastAPI</span><span>Streamlit</span><span>Kafka / Redpanda</span><span>Docker</span><span>Power BI</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/UrbanFlow-AI" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="NY_TAXI_CDA500" class="item cat-ml" data-cat="ml" data-for="industry">
+        <summary>
+          <span class="flw">✿</span><span class="name">NYC Taxi Demand Forecast<span class="plus">+</span></span><span class="leader"></span><span class="price">live pipeline</span>
+          <span class="notes">How many taxis will each NYC zone need next hour? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          I built this one like a real product, not a notebook. Raw NYC taxi trips come in, get cleaned and turned into hourly demand per zone, and a model predicts what's coming next. GitHub Actions reruns the whole thing on a schedule, so it keeps itself fresh.
+          <ul>
+            <li>Tried the classics first (ARMA, ARIMA, Prophet), then XGBoost and LightGBM with engineered features and tuning</li>
+            <li>Separate feature, training and inference pipelines, with features and models stored in the Hopsworks feature store</li>
+            <li>A Streamlit app with a Folium map of predicted demand, plus a monitoring page that tracks prediction error over time</li>
+            <li>Experiments logged in MLflow, and a retraining step for when the model starts to drift</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>LightGBM</span><span>XGBoost</span><span>Prophet</span><span>Hopsworks</span><span>GitHub Actions</span><span>Streamlit</span><span>Folium</span><span>MLflow</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/NY_TAXI_CDA500" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="citi-bike-prediction" class="item cat-ml" data-cat="ml" data-for="industry">
+        <summary>
+          <span class="flw">✿</span><span class="name">Citi Bike Demand Prediction<span class="plus">+</span></span><span class="leader"></span><span class="price">live pipeline</span>
+          <span class="notes">Will there be a bike at the dock when you get there? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Same recipe, different city ride. This project predicts Citi Bike demand so stations can be restocked before they run dry. It pulls trip data, builds time-series features, and serves fresh predictions from an automated pipeline.
+          <ul>
+            <li>Step-by-step notebooks from fetching data to a baseline model, LightGBM and feature importance</li>
+            <li>Feature, training and inference pipelines that run on GitHub Actions and store features in Hopsworks</li>
+            <li>A Streamlit app to explore the predictions</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>LightGBM</span><span>scikit-learn</span><span>Hopsworks</span><span>GitHub Actions</span><span>Streamlit</span><span>Plotly</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/citi-bike-prediction" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="enterprise_genai_capstone" class="item cat-ml" data-cat="ml" data-for="industry">
+        <summary>
+          <span class="flw">✿</span><span class="name">Enterprise Document Q&amp;A<span class="plus">+</span></span><span class="leader"></span><span class="price">GenAI · RAG</span>
+          <span class="notes">Ask your company's documents a question, get a sourced answer <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Nobody wants to dig through 40 PDFs to find one policy. Upload PDFs, spreadsheets or text files, ask a question in plain English, and get an answer with citations back to the source. Behind the scenes, a small team of AI agents shares the work.
+          <ul>
+            <li>A planner agent figures out what you're asking, a retriever finds the right chunks, a reasoner writes the answer, and a verifier checks it against the sources</li>
+            <li>Google Gemini for both the language model and the embeddings, with smart chunking for better search</li>
+            <li>A Streamlit interface, built as my GenAI capstone project</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>Google Gemini</span><span>RAG</span><span>AI agents</span><span>Streamlit</span><span>pandas</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/enterprise_genai_capstone" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="churn-prediction" class="item cat-ml" data-cat="ml" data-for="industry">
+        <summary>
+          <span class="flw">✿</span><span class="name">Customer Churn Prediction<span class="plus">+</span></span><span class="leader"></span><span class="price">production-style ML</span>
+          <span class="notes">Which customers are about to say goodbye? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          A churn model is easy. A churn model someone else can run, retrain and trust takes more work, and that's what this project is about. Data lives in a database, experiments are tracked, and the whole app ships in a container.
+          <ul>
+            <li>Trains and compares Logistic Regression, Random Forest and XGBoost</li>
+            <li>Stores data in SQLite, tracks every run's settings and scores in MLflow, and keeps settings in one config file</li>
+            <li>Clean, modular code with logging and unit tests, a Streamlit front end, and a Dockerfile to run it anywhere</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>scikit-learn</span><span>XGBoost</span><span>MLflow</span><span>SQLite</span><span>Streamlit</span><span>Docker</span><span>pytest</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/churn-prediction" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="utility-billing-ai" class="item cat-ml" data-cat="ml" data-for="industry">
+        <summary>
+          <span class="flw">✿</span><span class="name">Utility Billing AI<span class="plus">+</span></span><span class="leader"></span><span class="price">agentic auditor</span>
+          <span class="notes">Catches overcharges hiding in utility bills <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Commercial utility bills are full of rate tiers, surcharges and taxes, and checking them by hand takes hours. I call this one The Agentic Auditor. It reads the bill, reads the official tariff, works out what the customer should have paid, and explains any difference in plain English.
+          <ul>
+            <li>Pulls text and tables out of bill PDFs (pdfplumber, camelot) and parses tariff documents by service class</li>
+            <li>GPT-4o-mini turns tariff wording into structured rules, and a rule-based engine recalculates every charge</li>
+            <li>Flags overcharges, has an LLM explain them, and exports audit reports as PDF or CSV</li>
+            <li>Airflow runs the pipeline, PostgreSQL on AWS RDS and S3 store everything, and Terraform sets up the cloud side</li>
+            <li>A Streamlit app with login, bill upload, audit results, tariff management and reports</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>OpenAI API</span><span>Airflow</span><span>PostgreSQL</span><span>AWS RDS</span><span>AWS S3</span><span>Terraform</span><span>Docker</span><span>Streamlit</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/utility-billing-ai" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="Supply-Chain-Performance-Analytics-Dashboard" class="item cat-dash" data-cat="dash" data-for="industry">
+        <summary>
+          <span class="flw">❀</span><span class="name">Supply Chain Performance<span class="plus">+</span></span><span class="leader"></span><span class="price">Power BI</span>
+          <span class="notes">The Monday-morning questions, answered on one page <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          A supply chain manager asks the same questions every Monday: What sold? What made money? What shipped late? Who's buying? This Power BI dashboard answers all four on one page, so nobody has to dig through spreadsheets.
+          <div class="stack"><span>Power BI</span><span>DAX</span><span>Power Query</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/Supply-Chain-Performance-Analytics-Dashboard" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details data-repo="LearnPulse" class="item cat-res" data-cat="res" data-for="research">
+        <summary>
+          <span class="flw">✾</span><span class="name">LearnPulse<span class="plus">+</span></span><span class="leader"></span><span class="price">learning analytics</span>
+          <span class="notes">Is this student acting differently than usual? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Most dropout models ask "is this student active enough?" I'm asking something else: "is this student acting differently than they usually do?" A quiet student going quiet isn't news. A busy student going quiet might be. LearnPulse is the pipeline I built to test that idea on the Open University Learning Analytics Dataset.
+          <ul>
+            <li>Every student gets their own baseline, built from daily activity, seven-day rolling windows, z-scores and gaps between logins</li>
+            <li>No student ever shows up in both training and validation, so the model can't cheat by remembering people</li>
+            <li>Side-by-side tests: raw activity vs. personal change vs. both together</li>
+            <li>Calibration and thresholds are picked from training data only, to keep the results honest</li>
+            <li>A growing pile of automated tests, because I don't trust code I haven't tested</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>scikit-learn</span><span>automated tests</span><span>OULAD</span></div>
+        </div>
+      </details>
+
+      <details data-repo="Parkinsons_Disease" class="item cat-res" data-cat="res" data-for="industry research">
+        <summary>
+          <span class="flw">✾</span><span class="name">Parkinson's Detection from Voice<span class="plus">+</span></span><span class="leader"></span><span class="price">health ML</span>
+          <span class="notes">Can a few seconds of speech hint at Parkinson's? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Parkinson's can change a person's voice before other signs show up. Using 195 voice recordings described by 22 acoustic measurements (things like jitter, shimmer and pitch), I compared eight classifiers to see which could tell the groups apart best.
+          <ul>
+            <li>KNN, Logistic Regression, Naive Bayes, SVM, Decision Tree, Random Forest, AdaBoost and XGBoost, each tuned with grid search</li>
+            <li>Stratified cross-validation and SMOTE to handle the imbalance between classes</li>
+            <li>Side-by-side charts of accuracy, precision, recall and F1, with an eye on recall, because missing a real case matters most here</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>scikit-learn</span><span>XGBoost</span><span>imbalanced-learn</span><span>seaborn</span></div>
+          <a class="gh" href="https://github.com/Avipsa-Bhujabal/Parkinsons_Disease" target="_blank" rel="noopener">See the code on GitHub →</a>
+        </div>
+      </details>
+
+      <details class="item cat-res" data-cat="res" data-for="research">
+        <summary>
+          <span class="flw">✾</span><span class="name">Vision-language study<span class="plus">+</span></span><span class="leader"></span><span class="price">exploration</span>
+          <span class="notes">When AI describes a dog that isn't there <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
+        </summary>
+        <div class="body">
+          Image captioning models sometimes describe things that aren't in the picture. I compared CNN-LSTM and BLIP captioners and used YOLOv5 object detection to catch those made-up objects. This project got me wondering how much people trust what AI tells them, and that question led me to research.
+          <div class="stack"><span>BLIP</span><span>CNN-LSTM</span><span>YOLOv5</span></div>
+        </div>
+      </details>
+    </div>
+    <p class="synced" id="synced" hidden></p>
+  </section>
+
+  <section id="pantry">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">The potting shed</div>
+        <h2>What I grow things with</h2>
+      </div>
+      <p>My tools, sorted into seed packets. Pick a bouquet up top and my go-to tools light up.</p>
+    </div>
+    <div class="pantry">
+      <div class="jar"><h3>Languages</h3><div class="chips">
+        <span class="chip" data-for="industry research">Python</span><span class="chip" data-for="industry">SQL</span><span class="chip" data-for="industry">PySpark</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span><span class="chip">C</span></div></div>
+      <div class="jar"><h3>Machine learning</h3><div class="chips">
+        <span class="chip" data-for="industry research">scikit-learn</span><span class="chip" data-for="industry">XGBoost</span><span class="chip" data-for="industry">LightGBM</span><span class="chip">Random Forest</span><span class="chip" data-for="industry">Time series (ARIMA, Prophet)</span><span class="chip" data-for="research">Model evaluation</span><span class="chip" data-for="research">Calibration</span><span class="chip" data-for="research">Imbalanced data</span></div></div>
+      <div class="jar"><h3>GenAI &amp; MLOps</h3><div class="chips">
+        <span class="chip">Google Gemini</span><span class="chip">OpenAI API</span><span class="chip" data-for="industry">RAG</span><span class="chip">AI agents</span><span class="chip" data-for="industry">MLflow</span><span class="chip">Hopsworks feature store</span><span class="chip" data-for="industry">GitHub Actions</span><span class="chip">Docker</span></div></div>
+      <div class="jar"><h3>Data platforms &amp; cloud</h3><div class="chips">
+        <span class="chip" data-for="industry">Databricks</span><span class="chip" data-for="industry">Snowflake</span><span class="chip">BigQuery</span><span class="chip">dbt</span><span class="chip">Airflow</span><span class="chip" data-for="industry">AWS S3</span><span class="chip">Glue</span><span class="chip">Athena</span><span class="chip">Lambda</span><span class="chip">RDS</span><span class="chip">Terraform</span><span class="chip">Kafka</span></div></div>
+      <div class="jar"><h3>BI &amp; reporting</h3><div class="chips">
+        <span class="chip" data-for="industry">Power BI</span><span class="chip" data-for="industry">DAX</span><span class="chip">Power Query</span><span class="chip">Excel</span><span class="chip">Plotly</span><span class="chip">Folium</span></div></div>
+      <div class="jar"><h3>Apps &amp; people</h3><div class="chips">
+        <span class="chip">FastAPI</span><span class="chip" data-for="industry">Streamlit</span><span class="chip" data-for="research">UX evaluation</span><span class="chip" data-for="research">Accessibility</span><span class="chip" data-for="research">Literature reviews</span></div></div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="story">
+      <div>
+        <div class="eyebrow">The story so far</div>
+        <h3 style="margin-top:6px">Work</h3>
+        <div class="entry"><span class="where">Troy &amp; Banks</span><b>Utility billing &amp; audit analytics</b><p>Kept electric utility bills honest with compliance and audit reporting. Taught me that one wrong decimal can matter a lot.</p></div>
+        <div class="entry"><span class="where">Glosity</span><b>Stakeholder analytics</b><p>Turned product data into answers people could act on, using SQL, Snowflake and Power BI. Also learned to explain a chart to someone who has five minutes.</p></div>
+      </div>
+      <div>
+        <div class="eyebrow">&nbsp;</div>
+        <h3 style="margin-top:6px">Education &amp; certifications</h3>
+        <div class="entry"><span class="where">University at Buffalo</span><b>M.S. Engineering Science, Data Science</b><p>Statistical learning, probability, machine learning at scale and experimental design. Fueled by a lot of iced lattes.</p></div>
+        <div class="entry"><span class="where">Silicon Institute of Technology</span><b>B.Tech. Computer Science &amp; Engineering</b></div>
+        <div class="entry"><span class="where">Microsoft · Databricks</span><b>PL-300 Power BI Data Analyst · Data Engineer Associate</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">For the research-curious · how I got here</div>
+        <h2>From writing code to studying learners</h2>
+      </div>
+      <p>Every project left me with a new question. This is how one led to the next.</p>
+    </div>
+    <ol class="path">
+      <li><span class="bean"></span><b>Computer science</b><p>A B.Tech in CSE taught me to build things and to break them on purpose.</p></li>
+      <li><span class="bean"></span><b>Data at work</b><p>Audit and stakeholder analytics showed me that numbers change real decisions for real people.</p></li>
+      <li><span class="bean"></span><b>AI that makes things up</b><p>Caption models describing objects that weren't there made me ask how much people trust AI outputs.</p></li>
+      <li><span class="bean"></span><b>LearnPulse</b><p>So I turned to learners: can change from a student's own normal warn us before they drift away?</p></li>
+    </ol>
+  </section>
+
+  <section id="flight">
+    <div class="flight">
+      <div>
+        <div class="eyebrow">A closer look · LearnPulse</div>
+        <h2 style="font-size:clamp(2rem,4.4vw,3rem); margin-bottom:16px">Is "different from usual" a better warning sign than "less than average"?</h2>
+        <p>Three models, one question. Model A only knows how active a student was this week. Model B knows how that compares to the student's own normal. Model C gets both. So far, knowing someone's normal seems to help.</p>
+        <p class="note">Small print: these results come from one course run (OULAD module AAA, 2013J), so they describe that setting only. They aren't published findings.</p>
+      </div>
+      <div class="chart">
+        <div class="tabs" role="group" aria-label="Metric">
+          <button class="tab" data-m="pr" aria-pressed="true">PR-AUC</button>
+          <button class="tab" data-m="roc" aria-pressed="false">ROC-AUC</button>
+          <button class="tab" data-m="f1" aria-pressed="false">F1</button>
+          <button class="tab" data-m="brier" aria-pressed="false">Brier</button>
+        </div>
+        <div class="bars" id="bars"></div>
+        <div class="axis" id="axis"></div>
+        <p class="chart-cap" id="chart-cap"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Research notes</div>
+        <h2>Questions that keep me up at night</h2>
+      </div>
+      <p>Besides the cold brew. These are the questions I keep coming back to. They're early ideas, not finished work.</p>
+    </div>
+    <div class="notes-grid">
+      <div class="card-q"><div class="eyebrow">Learner change</div><p>Can we spot a student drifting away by comparing them to themselves instead of to everyone else?</p></div>
+      <div class="card-q"><div class="eyebrow">AI help-seeking</div><p>When does asking ChatGPT for help build real understanding, and when does it quietly replace it?</p></div>
+      <div class="card-q"><div class="eyebrow">Feedback &amp; agency</div><p>When students see a dashboard about themselves, does it help them take charge, or just make them anxious?</p></div>
+    </div>
+    <p class="goal"><span class="eyebrow">The long game</span>I want to build learning analytics and AI tools that help students reflect and act on their own learning, without turning them into a risk score or teaching them to lean on automation.</p>
+  </section>
+
+  <section id="hello">
+    <div class="contact">
+      <div>
+        <div class="eyebrow">Come say hi</div>
+        <h2>Let's grab a cold brew (virtually).</h2>
+        <p style="color:var(--muted)">Hiring for a data analyst, BI, data engineering or applied ML role? Researching how people learn? Or just want to argue about the best chart type? My inbox is open, and I reply faster than a latte goes cold.</p>
+      </div>
+      <div>
+      <div class="email-box">
+        <code id="email">bhujabal.avipsa@gmail.com</code>
+        <button class="btn" id="copy">Copy email</button>
+      </div>
+      <div class="socials"><a class="btn-outline" href="https://www.linkedin.com/in/avipsa-bhujabal/" target="_blank" rel="noopener">LinkedIn</a><a class="btn-outline" href="https://github.com/Avipsa-Bhujabal" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Grown with love, Python and way too much cold brew · © 2026 Avipsa Bhujabal</footer>
+</main>
+
+<script>
+(function(){
+  var blends = ["industry","house","research"];
+  var lines = {
+    house: "Half data builder, half researcher. I build the pipelines, dashboards and apps that turn messy data into decisions, and I study how students change over time.",
+    industry: "I write the SQL, build the pipeline, make the Power BI dashboard, and then explain it to the people who'll actually use it. That last part is my favorite. Python, PySpark, Databricks and FastAPI included.",
+    research: "Outside of work, I dig into learning analytics and human-centered AI. I want to know how students change over time, and how AI can support their thinking without doing it for them."
+  };
+
+  // ---- bouquet
+  (function(){
+    var NS="http://www.w3.org/2000/svg", root=document.getElementById("bouquet");
+    function el(tag, attrs, parent){ var e=document.createElementNS(NS,tag); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent||root).appendChild(e); return e; }
+    var seed=7; function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
+    var base={x:130,y:236};
+    var flowers=[
+      {t:"carnation",x:92,y:62,r:22},{t:"tulip",x:152,y:40,rot:6},{t:"tulip",x:62,y:122,rot:-20},
+      {t:"peony",x:132,y:112},{t:"tulip",x:200,y:106,rot:18},{t:"carnation",x:184,y:170,r:20},{t:"carnation",x:80,y:178,r:18}
+    ];
+    // stems + leaves
+    var sg=el("g",{});
+    flowers.forEach(function(f){
+      var mx=(f.x+base.x)/2 + (f.x<base.x?-8:8);
+      el("path",{d:"M"+f.x+" "+(f.y+10)+" Q "+mx+" "+((f.y+base.y)/2)+" "+base.x+" "+base.y, fill:"none", stroke:"var(--leaf)","stroke-width":3.5,"stroke-linecap":"round"},sg);
+    });
+    [[70,150,-40],[196,140,38],[110,170,-20],[160,188,24],[48,196,-60],[214,198,60]].forEach(function(l){
+      el("ellipse",{cx:l[0],cy:l[1],rx:8,ry:22,fill:l[2]<0?"var(--leaf-2)":"var(--leaf)",transform:"rotate("+l[2]+" "+l[0]+" "+l[1]+")"},sg);
+    });
+    function ruffle(g,r1,r2,n,fill){
+      var d=""; for (var i=0;i<n;i++){ var a=i/n*Math.PI*2, r=(i%2?r2:r1)+(rnd()*2.4-1.2); d+=(i?"L":"M")+(Math.cos(a)*r).toFixed(1)+" "+(Math.sin(a)*r).toFixed(1); }
+      el("path",{d:d+"Z",fill:fill,stroke:"#fff","stroke-opacity":.5,"stroke-width":1,"stroke-linejoin":"round"},g);
+    }
+    flowers.forEach(function(f){
+      var outer=el("g",{"class":"fl "+f.t});
+      var g=el("g",{transform:"translate("+f.x+" "+f.y+") rotate("+(f.rot||0)+")"},outer);
+      if (f.t==="peony"){
+        [[11,34,30,21,"var(--peony-2)"],[9,21,24,17,"var(--peony)"],[7,10,17,13,"var(--peony-3)"]].forEach(function(L,li){
+          for (var i=0;i<L[0];i++){ var a=i/L[0]*360+li*17; el("ellipse",{cx:0,cy:-L[1],rx:L[3],ry:L[2],fill:L[4],stroke:"#fff","stroke-opacity":.55,"stroke-width":1.2,transform:"rotate("+a+")"},g); }
+        });
+        el("circle",{cx:0,cy:0,r:9,fill:"var(--peony-2)"},g);
+        el("path",{d:"M-5 -2 Q 0 -8 5 -2 M-4 3 Q 0 -1 4 3",fill:"none",stroke:"var(--peony-3)","stroke-width":1.5,"stroke-linecap":"round"},g);
+      } else if (f.t==="tulip"){
+        el("path",{d:"M-16 -4 C -18 -26, -8 -34, 0 -26 C 8 -34, 18 -26, 16 -4 C 12 10, -12 10, -16 -4 Z",fill:"var(--tulip)",stroke:"#fff","stroke-opacity":.6,"stroke-width":1.2},g);
+        el("path",{d:"M-8 -2 C -10 -22, 0 -34, 0 -34 C 0 -34, 10 -22, 8 -2 C 5 8, -5 8, -8 -2 Z",fill:"var(--tulip-2)",opacity:.9},g);
+      } else {
+        ruffle(g,f.r,f.r-5,34,"var(--carn)");
+        ruffle(g,f.r-6,f.r-10,26,"var(--carn-2)");
+        ruffle(g,f.r-12,f.r-15,18,"var(--carn)");
+      }
+    });
+    // wrap + ribbon
+    el("path",{d:"M58 196 L 202 196 L 150 284 L 110 284 Z",fill:"var(--wrap)",stroke:"var(--line)","stroke-width":2});
+    el("path",{d:"M58 196 L 122 210 L 110 284 Z",fill:"#fff",opacity:.35});
+    el("path",{d:"M130 238 C 108 222, 96 236, 104 246 C 110 252, 124 246, 130 238 Z",class:"ribbon"});
+    el("path",{d:"M130 238 C 152 222, 164 236, 156 246 C 150 252, 136 246, 130 238 Z",class:"ribbon"});
+    el("path",{d:"M128 240 L 116 272 L 124 268 L 130 276 Z M132 240 L 144 272 L 136 268 L 130 276 Z",class:"ribbon",opacity:.85});
+    el("circle",{cx:130,cy:239,r:5,class:"ribbon",stroke:"#fff","stroke-width":1.5});
+  })();
+  var body = document.body, tag = document.getElementById("tagline");
+  function setBlend(b){
+    body.dataset.blend = b;
+    tag.style.opacity = 0;
+    setTimeout(function(){ tag.textContent = lines[b]; tag.style.opacity = 1; }, 180);
+    document.querySelectorAll(".blend").forEach(function(btn){ btn.setAttribute("aria-pressed", btn.dataset.blend === b); });
+    document.querySelectorAll("details.item").forEach(function(it){
+      var match = b === "house" || it.dataset.for.split(" ").indexOf(b) > -1;
+      it.classList.toggle("faded", !match);
+      it.classList.toggle("recommended", b !== "house" && match);
+    });
+    document.querySelectorAll(".chip").forEach(function(c){
+      var f = c.dataset.for || "";
+      c.classList.toggle("hot", b !== "house" && f.split(" ").indexOf(b) > -1);
+    });
+    try{ localStorage.setItem("blend4", b); }catch(e){}
+  }
+  document.querySelectorAll(".blend").forEach(function(btn){ btn.addEventListener("click", function(){ setBlend(btn.dataset.blend); }); });
+  document.getElementById("cup").addEventListener("click", function(){
+    var i = blends.indexOf(body.dataset.blend); setBlend(blends[(i+1) % blends.length]);
+  });
+  var start = "industry";
+  try{ var s = localStorage.getItem("blend4"); if (blends.indexOf(s) > -1) start = s; }catch(e){}
+  tag.textContent = lines[start]; setBlend(start);
+
+  // tasting-flight chart
+  var data = {
+    pr:{label:"PR-AUC", max:0.4, ticks:[0,0.1,0.2,0.3,0.4], lower:false, v:[0.2574,0.3413,0.3361]},
+    roc:{label:"ROC-AUC", max:1, ticks:[0,0.25,0.5,0.75,1], lower:false, v:[0.8189,0.8541,0.8586]},
+    f1:{label:"F1", max:0.4, ticks:[0,0.1,0.2,0.3,0.4], lower:false, v:[0.2522,0.3191,0.3132]},
+    brier:{label:"Brier score", max:0.2, ticks:[0,0.05,0.1,0.15,0.2], lower:true, v:[0.1745,0.1428,0.1423]}
+  };
+  var names = ["A · absolute","B · personal change","C · combined"];
+  var caps = {
+    pr:"Higher is better. With only about 5–7% positive labels, PR-AUC is the stricter test.",
+    roc:"Higher is better. All three rank students well; the gap is smaller here than on PR-AUC.",
+    f1:"Higher is better. Personal-change features improve precision at similar recall.",
+    brier:"Lower is better. Measures how well predicted probabilities match what happened."
+  };
+  var bars = document.getElementById("bars");
+  names.forEach(function(n){
+    var r = document.createElement("div"); r.className = "bar-row";
+    r.innerHTML = '<span>Model '+n+'</span><div class="bar-track"><div class="bar-fill" style="width:0"></div></div><span class="bar-val"></span>';
+    bars.appendChild(r);
+  });
+  function draw(m){
+    var d = data[m], best = d.lower ? Math.min.apply(null,d.v) : Math.max.apply(null,d.v);
+    bars.querySelectorAll(".bar-row").forEach(function(r,i){
+      r.querySelector(".bar-fill").style.width = (d.v[i]/d.max*100)+"%";
+      r.querySelector(".bar-val").textContent = d.v[i].toFixed(3);
+      r.classList.toggle("best", d.v[i] === best);
+    });
+    document.getElementById("axis").innerHTML = d.ticks.map(function(t){return "<span>"+t+"</span>";}).join("");
+    document.getElementById("chart-cap").textContent = caps[m];
+    document.querySelectorAll(".tab").forEach(function(t){ t.setAttribute("aria-pressed", t.dataset.m === m); });
+  }
+  document.querySelectorAll(".tab").forEach(function(t){ t.addEventListener("click", function(){ draw(t.dataset.m); }); });
+  requestAnimationFrame(function(){ draw("pr"); });
+
+  // copy email
+  document.getElementById("copy").addEventListener("click", function(){
+    var btn = this, txt = document.getElementById("email").textContent;
+    function done(){ btn.textContent = "Copied! ♥"; setTimeout(function(){ btn.textContent = "Copy email"; }, 1600); }
+    try{
+      navigator.clipboard.writeText(txt).then(done, function(){ selectIt(); });
+    }catch(e){ selectIt(); }
+    function selectIt(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("email")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Press Ctrl+C"; }
+  });
+
+
+  // ---- live from GitHub: status, last update, new repos
+  (function(){
+    var USER="Avipsa-Bhujabal";
+    var HIDE=["avipsa-bhujabal.github.io","applypilotai","applypilot-ai","applypilot"];   // repos never shown automatically
+    var board=document.getElementById("menu-board");
+    function ago(iso){ var d=(Date.now()-new Date(iso))/864e5; if(d<1) return "today"; if(d<2) return "yesterday"; if(d<30) return Math.floor(d)+" days ago"; if(d<365) return Math.floor(d/30)+" mo ago"; return Math.floor(d/365)+" yr ago"; }
+    function pretty(n){ return n.replace(/[-_]+/g," ").replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+    function counts(){
+      var all=board.querySelectorAll("details.item");
+      document.querySelectorAll(".filter").forEach(function(f){
+        var v=f.dataset.f, n=0; all.forEach(function(it){ if(v==="all"||it.dataset.cat===v) n++; });
+        f.querySelector("span").textContent=n; if(v==="new") f.hidden = n===0;
+      });
+    }
+    counts();
+    function status(card, topics){
+      var price=card.querySelector(".price");
+      if (!price.dataset.label) price.dataset.label = price.textContent;
+      price.textContent = (topics.indexOf("in-progress")>-1 || topics.indexOf("wip")>-1) ? "in progress" : price.dataset.label;
+    }
+    function meta(card, r){
+      var live=card.querySelector(".live"); live.innerHTML="";
+      var a=document.createElement("span"); a.innerHTML="<b>●</b> updated "+ago(r.pushed_at); live.appendChild(a);
+      if (r.language){ var l=document.createElement("span"); l.textContent=r.language; live.appendChild(l); }
+      if (r.stargazers_count){ var st=document.createElement("span"); st.textContent="★ "+r.stargazers_count; live.appendChild(st); }
+      live.hidden=false;
+      if (!card.querySelector(".gh")){
+        var g=document.createElement("a"); g.className="gh"; g.href=r.html_url; g.target="_blank"; g.rel="noopener"; g.textContent="See the code on GitHub →";
+        card.querySelector(".body").appendChild(g);
+      }
+    }
+    function newCard(r){
+      var d=document.createElement("details"); d.className="item cat-new"; d.dataset.cat="new"; d.dataset.for="industry research"; d.dataset.repo=r.name;
+      d.innerHTML='<summary><span class="flw">🌱</span><span class="name"></span><span class="plus">+</span><span class="leader"></span><span class="price">just planted</span><span class="notes"></span><span class="live" hidden></span></summary><div class="body"><p></p><div class="stack"></div></div>';
+      d.querySelector(".name").textContent=pretty(r.name);
+      d.querySelector(".notes").textContent=r.description||"A new project, fresh from GitHub.";
+      d.querySelector(".body p").textContent=r.description||"Details coming soon. Take a look at the code on GitHub.";
+      (r.topics||[]).filter(function(t){return ["complete","completed","in-progress","wip"].indexOf(t)<0;}).slice(0,8).forEach(function(t){ var sp=document.createElement("span"); sp.textContent=t; d.querySelector(".stack").appendChild(sp); });
+      status(d, r.topics||[]); meta(d, r); board.appendChild(d);
+    }
+    fetch("https://api.github.com/users/"+USER+"/repos?per_page=100&sort=pushed")
+      .then(function(res){ if(!res.ok) throw 0; return res.json(); })
+      .then(function(list){
+        var byName={}; list.forEach(function(r){ byName[r.name.toLowerCase()]=r; });
+        var shown={};
+        board.querySelectorAll("details.item[data-repo]").forEach(function(card){
+          var r=byName[card.dataset.repo.toLowerCase()]; shown[card.dataset.repo.toLowerCase()]=1;
+          if (r){ status(card, r.topics||[]); meta(card, r); }
+        });
+        list.filter(function(r){ var n=r.name.toLowerCase(); return !r.fork && !r.archived && !shown[n] && HIDE.indexOf(n)<0; })
+            .forEach(newCard);
+        counts();
+        if (list.length){ var sy=document.getElementById("synced"); sy.textContent="✿ Synced live from GitHub · last update "+ago(list[0].pushed_at); sy.hidden=false; }
+      })
+      .catch(function(){ /* offline or rate-limited: the page keeps its built-in content */ });
+  })();
+  // project filters
+  document.querySelectorAll(".filter").forEach(function(f){
+    f.addEventListener("click", function(){
+      var v=f.dataset.f;
+      document.querySelectorAll(".filter").forEach(function(x){ x.setAttribute("aria-pressed", x===f); });
+      document.querySelectorAll("details.item").forEach(function(it){ it.hidden = !(v==="all" || it.dataset.cat===v); });
+    });
+  });
+  // drifting petals
+  (function(){
+    var c=document.getElementById("petals"); if(!c||!c.getContext) return;
+    var ctx=c.getContext("2d"), W, H, dpr=Math.min(window.devicePixelRatio||1,2), P=[];
+    var cols=["#F6B5C5","#EE8FA6","#F7B39A","#F08C6E","#E0607E"];
+    function size(){ W=c.clientWidth; H=c.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+    size(); window.addEventListener("resize", size);
+    for (var i=0;i<22;i++) P.push({x:Math.random()*W, y:Math.random()*H, r:5+Math.random()*6, s:.25+Math.random()*.5, a:Math.random()*6, w:.01+Math.random()*.02, c:cols[i%cols.length]});
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      P.forEach(function(p){
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.globalAlpha=.55; ctx.fillStyle=p.c;
+        ctx.beginPath(); ctx.moveTo(0,-p.r); ctx.bezierCurveTo(p.r,-p.r*.6,p.r*.7,p.r*.6,0,p.r); ctx.bezierCurveTo(-p.r*.7,p.r*.6,-p.r,-p.r*.6,0,-p.r); ctx.fill(); ctx.restore();
+      });
+    }
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function tick(){
+      P.forEach(function(p){ p.y+=p.s; p.x+=Math.sin(p.a)*.35; p.a+=p.w; if(p.y>H+10){ p.y=-10; p.x=Math.random()*W; } });
+      draw(); requestAnimationFrame(tick);
+    }
+    if (reduce) draw(); else tick();
+  })();
+  // petals on click
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.addEventListener("click", function(e){
+    if (reduce) return;
+    var glyphs = ["✿","❀","♥","✾","❁"]; var tints = ["#EE8FA6","#F08C6E","#C9375C","#F6B5C5","#8DB685"];
+    for (var i=0;i<5;i++){
+      var el = document.createElement("span"); el.className = "pop";
+      el.textContent = glyphs[Math.floor(Math.random()*glyphs.length)]; el.style.color = tints[Math.floor(Math.random()*tints.length)];
+      el.style.left = e.clientX+"px"; el.style.top = e.clientY+"px";
+      el.style.setProperty("--dx", (Math.random()*70-35)+"px");
+      el.style.animationDelay = (i*40)+"ms";
+      document.body.appendChild(el);
+      setTimeout(function(n){ return function(){ n.remove(); }; }(el), 1100);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
