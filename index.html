@@ -4,7 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Avipsa's Data Garden</title>
-<meta name="description" content="Avipsa Bhujabal — data scientist and analytics engineer. Projects, skills, and research in learning analytics.">
+<meta name="description" content="Avipsa Bhujabal, data analyst and data engineer. Projects in ML, data pipelines, GenAI and Power BI.">
+<meta property="og:title" content="Avipsa Bhujabal · Data Portfolio">
+<meta property="og:description" content="Data analyst and data engineer. ML apps, data pipelines, GenAI and Power BI dashboards.">
+<meta property="og:image" content="https://avipsa-bhujabal.github.io/cover.png">
+<meta property="og:url" content="https://avipsa-bhujabal.github.io/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Parisienne&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -181,6 +186,11 @@ footer{padding-block:30px 44px; font-family:var(--mono); font-size:.78rem; color
   .path .bean{position:absolute; left:-34px; top:2px; margin:0}
 }
 
+/* ---- live github */
+.item .live{grid-row:4; grid-column:1 / -1; font-family:var(--mono); font-size:.72rem; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap}
+.item .live b{font-weight:500; color:var(--leaf)}
+details.item.cat-new{--c:var(--leaf-2)}
+.synced{font-family:var(--mono); font-size:.75rem; color:var(--muted); margin-top:14px}
 /* ---- polish pass */
 #petals{position:absolute; top:0; left:0; width:100%; height:760px; pointer-events:none; z-index:0}
 .hero{position:relative; z-index:1}
@@ -309,17 +319,19 @@ details.item summary{padding-right:40px}
     </div>
 
     <div class="filters" role="group" aria-label="Filter projects">
-      <button class="filter" data-f="all" aria-pressed="true">All <span>10</span></button>
-      <button class="filter" data-f="ml" aria-pressed="false">✿ ML &amp; data apps <span>6</span></button>
-      <button class="filter" data-f="dash" aria-pressed="false">❀ Dashboards <span>1</span></button>
-      <button class="filter" data-f="res" aria-pressed="false">✾ Research <span>3</span></button>
+      <button class="filter" data-f="all" aria-pressed="true">All <span></span></button>
+      <button class="filter" data-f="ml" aria-pressed="false">✿ ML &amp; data apps <span></span></button>
+      <button class="filter" data-f="dash" aria-pressed="false">❀ Dashboards <span></span></button>
+      <button class="filter" data-f="res" aria-pressed="false">✾ Research <span></span></button>
+      <button class="filter" data-f="new" aria-pressed="false" hidden>🌱 Just planted <span></span></button>
     </div>
     <div class="menu" id="menu-board">
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry research">
+      <details data-repo="UrbanFlow-AI" class="item cat-ml" data-cat="ml" data-for="industry research">
         <summary>
           <span class="flw">✿</span><span class="name">UrbanFlow AI<span class="plus">+</span></span><span class="leader"></span><span class="price">city data platform</span>
           <span class="notes">Taxis, weather and transit delays, all in one city dashboard <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           What happens to a city's traffic when it rains during rush hour? UrbanFlow pulls in NYC taxi trips, NOAA weather and transit delays, and runs them through a full data platform, from raw files to maps, predictions and a chat assistant.
@@ -335,10 +347,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry">
+      <details data-repo="NY_TAXI_CDA500" class="item cat-ml" data-cat="ml" data-for="industry">
         <summary>
           <span class="flw">✿</span><span class="name">NYC Taxi Demand Forecast<span class="plus">+</span></span><span class="leader"></span><span class="price">live pipeline</span>
           <span class="notes">How many taxis will each NYC zone need next hour? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           I built this one like a real product, not a notebook. Raw NYC taxi trips come in, get cleaned and turned into hourly demand per zone, and a model predicts what's coming next. GitHub Actions reruns the whole thing on a schedule, so it keeps itself fresh.
@@ -353,10 +366,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry">
+      <details data-repo="citi-bike-prediction" class="item cat-ml" data-cat="ml" data-for="industry">
         <summary>
           <span class="flw">✿</span><span class="name">Citi Bike Demand Prediction<span class="plus">+</span></span><span class="leader"></span><span class="price">live pipeline</span>
           <span class="notes">Will there be a bike at the dock when you get there? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           Same recipe, different city ride. This project predicts Citi Bike demand so stations can be restocked before they run dry. It pulls trip data, builds time-series features, and serves fresh predictions from an automated pipeline.
@@ -370,10 +384,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry">
+      <details data-repo="enterprise_genai_capstone" class="item cat-ml" data-cat="ml" data-for="industry">
         <summary>
           <span class="flw">✿</span><span class="name">Enterprise Document Q&amp;A<span class="plus">+</span></span><span class="leader"></span><span class="price">GenAI · RAG</span>
           <span class="notes">Ask your company's documents a question, get a sourced answer <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           Nobody wants to dig through 40 PDFs to find one policy. Upload PDFs, spreadsheets or text files, ask a question in plain English, and get an answer with citations back to the source. Behind the scenes, a small team of AI agents shares the work.
@@ -387,10 +402,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry">
+      <details data-repo="churn-prediction" class="item cat-ml" data-cat="ml" data-for="industry">
         <summary>
           <span class="flw">✿</span><span class="name">Customer Churn Prediction<span class="plus">+</span></span><span class="leader"></span><span class="price">production-style ML</span>
           <span class="notes">Which customers are about to say goodbye? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           A churn model is easy. A churn model someone else can run, retrain and trust takes more work, and that's what this project is about. Data lives in a database, experiments are tracked, and the whole app ships in a container.
@@ -404,10 +420,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-ml" data-cat="ml" data-for="industry">
+      <details data-repo="utility-billing-ai" class="item cat-ml" data-cat="ml" data-for="industry">
         <summary>
           <span class="flw">✿</span><span class="name">Utility Billing AI<span class="plus">+</span></span><span class="leader"></span><span class="price">agentic auditor</span>
           <span class="notes">Catches overcharges hiding in utility bills <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           Commercial utility bills are full of rate tiers, surcharges and taxes, and checking them by hand takes hours. I call this one The Agentic Auditor. It reads the bill, reads the official tariff, works out what the customer should have paid, and explains any difference in plain English.
@@ -423,10 +440,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-dash" data-cat="dash" data-for="industry">
+      <details data-repo="Supply-Chain-Performance-Analytics-Dashboard" class="item cat-dash" data-cat="dash" data-for="industry">
         <summary>
           <span class="flw">❀</span><span class="name">Supply Chain Performance<span class="plus">+</span></span><span class="leader"></span><span class="price">Power BI</span>
           <span class="notes">The Monday-morning questions, answered on one page <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           A supply chain manager asks the same questions every Monday: What sold? What made money? What shipped late? Who's buying? This Power BI dashboard answers all four on one page, so nobody has to dig through spreadsheets.
@@ -435,13 +453,14 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-res" data-cat="res" data-for="research">
+      <details data-repo="LearnPulse" class="item cat-res" data-cat="res" data-for="research">
         <summary>
-          <span class="flw">✾</span><span class="name">LearnPulse<span class="plus">+</span></span><span class="leader"></span><span class="price">in progress</span>
-          <span class="notes">Still blooming · is this student acting differently than usual? <span class="pick">your pick</span></span>
+          <span class="flw">✾</span><span class="name">LearnPulse<span class="plus">+</span></span><span class="leader"></span><span class="price">learning analytics</span>
+          <span class="notes">Is this student acting differently than usual? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
-          Most dropout models ask "is this student active enough?" I'm asking something else: "is this student acting differently than they usually do?" A quiet student going quiet isn't news. A busy student going quiet might be. LearnPulse is the pipeline I'm building to test that idea on the Open University Learning Analytics Dataset.
+          Most dropout models ask "is this student active enough?" I'm asking something else: "is this student acting differently than they usually do?" A quiet student going quiet isn't news. A busy student going quiet might be. LearnPulse is the pipeline I built to test that idea on the Open University Learning Analytics Dataset.
           <ul>
             <li>Every student gets their own baseline, built from daily activity, seven-day rolling windows, z-scores and gaps between logins</li>
             <li>No student ever shows up in both training and validation, so the model can't cheat by remembering people</li>
@@ -453,10 +472,11 @@ details.item summary{padding-right:40px}
         </div>
       </details>
 
-      <details class="item cat-res" data-cat="res" data-for="industry research">
+      <details data-repo="Parkinsons_Disease" class="item cat-res" data-cat="res" data-for="industry research">
         <summary>
           <span class="flw">✾</span><span class="name">Parkinson's Detection from Voice<span class="plus">+</span></span><span class="leader"></span><span class="price">health ML</span>
           <span class="notes">Can a few seconds of speech hint at Parkinson's? <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           Parkinson's can change a person's voice before other signs show up. Using 195 voice recordings described by 22 acoustic measurements (things like jitter, shimmer and pitch), I compared eight classifiers to see which could tell the groups apart best.
@@ -474,6 +494,7 @@ details.item summary{padding-right:40px}
         <summary>
           <span class="flw">✾</span><span class="name">Vision-language study<span class="plus">+</span></span><span class="leader"></span><span class="price">exploration</span>
           <span class="notes">When AI describes a dog that isn't there <span class="pick">your pick</span></span>
+          <span class="live" hidden></span>
         </summary>
         <div class="body">
           Image captioning models sometimes describe things that aren't in the picture. I compared CNN-LSTM and BLIP captioners and used YOLOv5 object detection to catch those made-up objects. This project got me wondering how much people trust what AI tells them, and that question led me to research.
@@ -481,6 +502,7 @@ details.item summary{padding-right:40px}
         </div>
       </details>
     </div>
+    <p class="synced" id="synced" hidden></p>
   </section>
 
   <section id="pantry">
@@ -547,7 +569,7 @@ details.item summary{padding-right:40px}
         <div class="eyebrow">A closer look · LearnPulse</div>
         <h2 style="font-size:clamp(2rem,4.4vw,3rem); margin-bottom:16px">Is "different from usual" a better warning sign than "less than average"?</h2>
         <p>Three models, one question. Model A only knows how active a student was this week. Model B knows how that compares to the student's own normal. Model C gets both. So far, knowing someone's normal seems to help.</p>
-        <p class="note">Small print: these are early experimental results from one course run (OULAD module AAA, 2013J). The project is still in progress, and these aren't published findings.</p>
+        <p class="note">Small print: these results come from one course run (OULAD module AAA, 2013J), so they describe that setting only. They aren't published findings.</p>
       </div>
       <div class="chart">
         <div class="tabs" role="group" aria-label="Metric">
@@ -726,6 +748,63 @@ details.item summary{padding-right:40px}
     function selectIt(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("email")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Press Ctrl+C"; }
   });
 
+
+  // ---- live from GitHub: status, last update, new repos
+  (function(){
+    var USER="Avipsa-Bhujabal";
+    var HIDE=["avipsa-bhujabal.github.io","applypilotai","applypilot-ai","applypilot"];   // repos never shown automatically
+    var board=document.getElementById("menu-board");
+    function ago(iso){ var d=(Date.now()-new Date(iso))/864e5; if(d<1) return "today"; if(d<2) return "yesterday"; if(d<30) return Math.floor(d)+" days ago"; if(d<365) return Math.floor(d/30)+" mo ago"; return Math.floor(d/365)+" yr ago"; }
+    function pretty(n){ return n.replace(/[-_]+/g," ").replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+    function counts(){
+      var all=board.querySelectorAll("details.item");
+      document.querySelectorAll(".filter").forEach(function(f){
+        var v=f.dataset.f, n=0; all.forEach(function(it){ if(v==="all"||it.dataset.cat===v) n++; });
+        f.querySelector("span").textContent=n; if(v==="new") f.hidden = n===0;
+      });
+    }
+    counts();
+    function status(card, topics){
+      var price=card.querySelector(".price");
+      if (!price.dataset.label) price.dataset.label = price.textContent;
+      price.textContent = (topics.indexOf("in-progress")>-1 || topics.indexOf("wip")>-1) ? "in progress" : price.dataset.label;
+    }
+    function meta(card, r){
+      var live=card.querySelector(".live"); live.innerHTML="";
+      var a=document.createElement("span"); a.innerHTML="<b>●</b> updated "+ago(r.pushed_at); live.appendChild(a);
+      if (r.language){ var l=document.createElement("span"); l.textContent=r.language; live.appendChild(l); }
+      if (r.stargazers_count){ var st=document.createElement("span"); st.textContent="★ "+r.stargazers_count; live.appendChild(st); }
+      live.hidden=false;
+      if (!card.querySelector(".gh")){
+        var g=document.createElement("a"); g.className="gh"; g.href=r.html_url; g.target="_blank"; g.rel="noopener"; g.textContent="See the code on GitHub →";
+        card.querySelector(".body").appendChild(g);
+      }
+    }
+    function newCard(r){
+      var d=document.createElement("details"); d.className="item cat-new"; d.dataset.cat="new"; d.dataset.for="industry research"; d.dataset.repo=r.name;
+      d.innerHTML='<summary><span class="flw">🌱</span><span class="name"></span><span class="plus">+</span><span class="leader"></span><span class="price">just planted</span><span class="notes"></span><span class="live" hidden></span></summary><div class="body"><p></p><div class="stack"></div></div>';
+      d.querySelector(".name").textContent=pretty(r.name);
+      d.querySelector(".notes").textContent=r.description||"A new project, fresh from GitHub.";
+      d.querySelector(".body p").textContent=r.description||"Details coming soon. Take a look at the code on GitHub.";
+      (r.topics||[]).filter(function(t){return ["complete","completed","in-progress","wip"].indexOf(t)<0;}).slice(0,8).forEach(function(t){ var sp=document.createElement("span"); sp.textContent=t; d.querySelector(".stack").appendChild(sp); });
+      status(d, r.topics||[]); meta(d, r); board.appendChild(d);
+    }
+    fetch("https://api.github.com/users/"+USER+"/repos?per_page=100&sort=pushed")
+      .then(function(res){ if(!res.ok) throw 0; return res.json(); })
+      .then(function(list){
+        var byName={}; list.forEach(function(r){ byName[r.name.toLowerCase()]=r; });
+        var shown={};
+        board.querySelectorAll("details.item[data-repo]").forEach(function(card){
+          var r=byName[card.dataset.repo.toLowerCase()]; shown[card.dataset.repo.toLowerCase()]=1;
+          if (r){ status(card, r.topics||[]); meta(card, r); }
+        });
+        list.filter(function(r){ var n=r.name.toLowerCase(); return !r.fork && !r.archived && !shown[n] && HIDE.indexOf(n)<0; })
+            .forEach(newCard);
+        counts();
+        if (list.length){ var sy=document.getElementById("synced"); sy.textContent="✿ Synced live from GitHub · last update "+ago(list[0].pushed_at); sy.hidden=false; }
+      })
+      .catch(function(){ /* offline or rate-limited: the page keeps its built-in content */ });
+  })();
   // project filters
   document.querySelectorAll(".filter").forEach(function(f){
     f.addEventListener("click", function(){
